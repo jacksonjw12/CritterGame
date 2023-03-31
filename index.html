@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JW WebGL Test</title>
+		<style>
+		body{
+			margin:0;
+			padding:0;
+			overflow:hidden;
+
+		}
+		canvas {
+			margin:0;
+			padding:0;
+		}
+		</style>
+<!--	Libraries	-->
+		<script type="text/javascript" src="gl-matrix-min.js"></script>
+		<script type="text/javascript" src="simplex-noise.js"></script>
+
+		<script>
+		const mat4 = glMatrix.mat4;
+		const vec2 = glMatrix.vec2;
+		const vec3 = glMatrix.vec3;
+		const vec4 = glMatrix.vec4;
+		const quat = glMatrix.quat;
+		</script>
+<!--		-->
+<!--	Order of the following matters	-->
+		<script type="text/javascript" src="PlayerInput.js"></script>
+
+		<script type="text/javascript" src="ShaderManager.js"></script>
+		<script type="text/javascript" src="Camera.js"></script>
+
+
+		<script type="text/javascript" src="shaders/ShaderProgram.js"></script>
+		<script type="text/javascript" src="shaders/DefaultShader.js"></script>
+		<script type="text/javascript" src="shaders/SimpleColorShader.js"></script>
+		<script type="text/javascript" src="shaders/DepthShader.js"></script>
+		<script type="text/javascript" src="shaders/PhongShader.js"></script>
+		<script type="text/javascript" src="shaders/ComprehensiveLightingShader.js"></script>
+		<script type="text/javascript" src="shaders/CoolShader.js"></script>
+		<script type="text/javascript" src="shaders/CoolShader2.js"></script>
+		<script type="text/javascript" src="shaders/RayMarch.js"></script>
+		<script type="text/javascript" src="shaders/DebugShader.js"></script>
+		<script type="text/javascript" src="shaders/CoordShader.js"></script>
+		<script type="text/javascript" src="shaders/CritterShader.js"></script>
+		<script type="text/javascript" src="shaders/GridShader.js"></script>
+
+
+
+		<script type="text/javascript" src="materials/Material.js"></script>
+		<script type="text/javascript" src="materials/defaultMaterial.js"></script>
+		<script type="text/javascript" src="materials/ShaderMaterial.js"></script>
+
+
+		<script type="text/javascript" src="geometry/Geometry.js"></script>
+		<script type="text/javascript" src="geometry/TriangleGeometry.js"></script>
+		<script type="text/javascript" src="geometry/PlaneGeometry.js"></script>
+		<script type="text/javascript" src="geometry/CircleGeometry.js"></script>
+		<script type="text/javascript" src="geometry/CubeGeometry.js"></script>
+		<script type="text/javascript" src="geometry/ArrowGeometry.js"></script>
+		<script type="text/javascript" src="geometry/CritterGeometry.js"></script>
+
+
+
+		<script type="text/javascript" src="objects/Object.js"></script>
+		<script type="text/javascript" src="objects/Triangle.js"></script>
+		<script type="text/javascript" src="objects/Plane.js"></script>
+		<script type="text/javascript" src="objects/Circle.js"></script>
+		<script type="text/javascript" src="objects/Cube.js"></script>
+		<script type="text/javascript" src="objects/Arrow.js"></script>
+		<script type="text/javascript" src="objects/Coords.js"></script>
+		<script type="text/javascript" src="objects/Critter.js"></script>
+		<script type="text/javascript" src="objects/Grid.js"></script>
+
+
+		<script type="text/javascript" src="scenes/Scene.js"></script>
+		<script type="text/javascript" src="scenes/TestScene.js"></script>
+		<script type="text/javascript" src="scenes/PlaneScene.js"></script>
+		<script type="text/javascript" src="scenes/FlightScene.js"></script>
+		<script type="text/javascript" src="scenes/CritterScene.js"></script>
+
+
+		<script type="text/javascript" src="Renderer.js"></script>
+
+		<script type="text/javascript">
+			let gl, resolution, input;
+
+			function initGL(canvas) {
+				try {
+					gl = canvas.getContext("webgl");
+					canvas.width = window.innerWidth;
+					canvas.height = window.innerHeight;
+					gl.viewportWidth = canvas.width;
+					gl.viewportHeight = canvas.height;
+					resolution = vec2.fromValues(canvas.width,canvas.height);
+					input = new PlayerInput(canvas);
+				} catch (e) {
+					alert(e);
+					console.log("error:" + e);
+				}
+				if (!gl) {
+					alert("Could not initialise WebGL");
+					document.write("Could not initialise WebGL on this platform(are you using mobile?)")
+				}
+			}
+
+
+			const clip = (val, start, end) => {
+				if(val < start) {
+					return start;
+				}
+				if(val > end) {
+					return end;
+				}
+				return val;
+			}
+
+
+
+			// function setMatrixUniforms() {
+			// 	gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
+			// 	gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
+
+
+			// }
+
+
+
+
+			let renderer, shaderManager;
+			function webGLStart() {
+
+				let canvas = document.getElementById("glcanvas");
+				initGL(canvas);
+
+				shaderManager = new ShaderManager();
+
+				renderer = new Renderer();
+				
+
+
+				// window.setTimeout(()=> {document.body.innerHTML = "reload"},1000)
+			}
+
+
+		</script>
+	</head>
+	<body onload="webGLStart();">
+		<canvas id="glcanvas" ></canvas>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "webglexperiments",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacksonjw12/WebGLExperiments.git"
+  },
+  "author": "Jackson Wheeler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jacksonjw12/WebGLExperiments/issues"
+  },
+  "homepage": "https://github.com/jacksonjw12/WebGLExperiments#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
