@@ -11,7 +11,8 @@ class Camera{
 
 
 		this.pMatrix = mat4.create();
-		mat4.perspective(this.pMatrix,45, gl.viewportWidth / gl.viewportHeight, 0.1, 40.0);
+		const depthCull = 100.0
+		mat4.perspective(this.pMatrix,45, gl.viewportWidth / gl.viewportHeight, 0.1, depthCull);
 
 
 
